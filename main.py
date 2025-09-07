@@ -14,20 +14,16 @@ def login():
 
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
-    return render_template('signup.html')
-@app.route ('/to_database', methods=['GET', 'POST'])
-def sendToDatabase():
     if request.method == 'POST':
         f_username = request.form.get('username')
         f_password = request.form.get('password')
         t_user = classes.User(f_username, f_password)
         main_db.insertVal(t_user)
-        return "Insertion was successful."
+        print("Accepted")
+        return render_template('signup.html')
     else:
         print("Insertion failed.")
         return render_template('signup.html')
-
-
 
 @app.route('/dashboard')
 def dashboard():

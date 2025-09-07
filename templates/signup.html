@@ -1,7 +1,11 @@
+{% extends "base.html" %}
+{% block title %} Sign Up {% endblock %}
+
+{% block content%}
 <div id="signup-template">
     <h1>Sign In</h1>
     <hr>
-    <form action="/to_database" method="POST">
+    <form action=" {{ url_for('save_user') }}" method="POST">
         <label name="username">Username</label>
         <input type="text" for="username" name="username">
         <br>
@@ -11,3 +15,4 @@
         <input type="submit" id="data-addition" value="Sign In">
     </form>
 </div>
+{% endblock %}
