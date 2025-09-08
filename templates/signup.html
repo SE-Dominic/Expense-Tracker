@@ -3,16 +3,16 @@
 
 {% block content%}
 <div id="signup-template">
-    <h1>Sign In</h1>
+    <h1>Sign Up</h1>
     <hr>
-    <form action=" {{ url_for('save_user') }}" method="POST">
+    <form action=" {{ url_for('signup') }}" method="POST">
         <label name="username">Username</label>
         <input type="text" for="username" name="username">
         <br>
         <label name="password">Password</label>
         <input type="text" for="password" name="password">
         <br>
-        <input type="submit" id="data-addition" value="Sign In">
+        <input type="submit" id="data-addition" value="Sign Up">
     </form>
 </div>
 {% endblock %}

@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for
 import classes
+import datetime
 app = Flask(__name__)
 
 main_db = classes.DB()
@@ -10,7 +11,26 @@ def home():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    if request.method == 'POST':
+        f_user = request.form.get('username')
+        f_pass = request.form.get('password')
+        idx = main_db.find(f_user)
+        if idx < 1:
+            print("User not found in database. ")
+        check_pass = main_db[idx].getPassword()
+        if f_pass == check_pass:
+            print("User is verified. ")
+        else:
+            print("User is not verified. Access denied. ")
     return render_template('login.html')
+
+@app.route('/index')
+def index():
+    return render_template('index.html')
+
+@app.route('/add_expense', methods=['GET', 'POST'])
+def add_expense():
+    return render_template('add_expense.html')
 
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
@@ -22,12 +42,7 @@ def signup():
         print("Accepted")
         return render_template('signup.html')
     else:
-        print("Insertion failed.")
-        return render_template('signup.html')
-
-@app.route('/dashboard')
-def dashboard():
-    return render_template('dashboard.html')
+        return "<h1>Insertion failed</h1>"
 
 if __name__ == '__main__':
     app.run(debug=True)

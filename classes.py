@@ -27,16 +27,16 @@ class DB:
                 self.db.remove(user)
         #user not found
         return f"User {val} was not found in database."
-    def find(self, val: str):
-        left = 0
-        right = len(self)
+    def find(self, val: str) -> int: #return index of where found
+        left: int = 0
+        right: int = len(self)
         #simple binary search to keep things quick and effictive O(log(n))
-        while (left < right):
-            mid = (left + right) // 2
+        while (left <= right):
+            mid = (left + right) / 2
             if self.db[mid].getUser() == val:
-                return self.db[mid]
+                return mid
             elif self.db[mid].getUser() < val:
                 left = mid + 1
             else:
-                right = mid
-        return None
+                right = mid - 1
+        return -1 #return -1 if not found
